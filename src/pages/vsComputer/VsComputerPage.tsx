@@ -3,25 +3,8 @@
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { toast } from "react-toastify";
-import { useShortcut } from "@/components/hooks/useShortcut";
-import Board from "@/components/ui/Board/Board";
-import BoardDisplay from "@/components/ui/Game/BoardDisplay";
-import BoardPreviewGrid from "@/components/ui/Game/BoardPreviewGrid";
-import BoardSelector from "@/components/ui/Game/BoardSelector";
-import GameActionBar from "@/components/ui/Game/GameActionBar";
-import GameCenterColumn from "@/components/ui/Game/GameCenterColumn";
-import GameContentArea from "@/components/ui/Game/GameContentArea";
-import GameLeftPanel from "@/components/ui/Game/GameLeftPanel";
-import GameStatsPanel from "@/components/ui/Game/GameStatsPanel";
-import type { MoveLogEntry } from "@/components/ui/Game/GameTopBar";
-import GameTopBar, { GameStatusBar } from "@/components/ui/Game/GameTopBar";
-import WalletBadge from "@/components/ui/Game/WalletBadge";
-import GameLayout from "@/components/ui/Layout/GameLayout";
-import { TOAST_IDS } from "@/constants/toast";
-import BoardConfigModal from "@/modals/BoardConfigModal";
-import ConfirmationModal from "@/modals/ConfirmationModal";
-import DifficultyModal from "@/modals/DifficultyModal";
-import WinnerModal from "@/modals/WinnerModal";
+import WalletBadge from "@/features/wallet/ui/WalletBadge";
+import WinnerModal from "@/features/winner/ui/WinnerModal";
 import {
 	createGame,
 	getWallet,
@@ -29,24 +12,48 @@ import {
 	quitGame,
 	skipMove,
 	undoMove,
-} from "@/services/game-apis";
-import { useGlobalModal } from "@/services/globalModal";
-import { convertBoard, convertCellOwners, isBoardDead } from "@/services/logic";
+} from "@/shared/api/game.api";
 import type {
 	MakeMoveResponse,
 	SkipMoveResponse,
 	UndoMoveResponse,
-} from "@/services/schema";
-import { playMoveSound, playWinSound } from "@/services/sounds";
-import { useCoins, useSound, useUser, useXP } from "@/services/store";
+} from "@/shared/api/game.schema";
+import {
+	convertBoard,
+	convertCellOwners,
+	isBoardDead,
+} from "@/shared/lib/game/logic";
+import { useGlobalModal } from "@/shared/lib/globalModalStore/useGlobalModalStore";
+import { useShortcut } from "@/shared/lib/shortcut/useShortcut";
+import { playMoveSound, playWinSound } from "@/shared/lib/sounds/sounds";
+import { useSound } from "@/shared/lib/sounds/useSound";
+import { useCoins } from "@/shared/lib/store/coins/useCoins";
+import { useUser } from "@/shared/lib/store/user/useUser";
+import { useXP } from "@/shared/lib/store/xp/useXP";
+import type { ErrorResponse } from "@/shared/types/api.types";
 import type {
 	BoardNumber,
 	BoardSize,
 	BoardState,
-	DifficultyLevel,
-	ErrorResponse,
 	NewGameResponse,
-} from "@/services/types";
+} from "@/shared/types/game.types";
+import type MoveLogEntry from "@/shared/types/MoveLogEntry.types";
+import Board from "@/shared/ui/board/Board";
+import BoardConfigModal from "@/shared/ui/modal/BoardConfigModal/BoardConfigModal";
+import ConfirmationModal from "@/shared/ui/modal/ConfirmationModal/ConfirmationModal";
+import DifficultyModal from "@/shared/ui/modal/DifficultyModal/DifficultyModal";
+import type { DifficultyLevel } from "@/shared/ui/modal/DifficultyModal/DifficultyModal.types";
+import { TOAST_IDS } from "@/shared/ui/toast/CustomToastContainer.config";
+import BoardDisplay from "@/widgets/Game/ui/BoardDisplay";
+import BoardPreviewGrid from "@/widgets/Game/ui/BoardPreviewGrid";
+import BoardSelector from "@/widgets/Game/ui/BoardSelector";
+import GameActionBar from "@/widgets/Game/ui/GameActionBar";
+import GameCenterColumn from "@/widgets/Game/ui/GameCenterColumn";
+import GameContentArea from "@/widgets/Game/ui/GameContentArea";
+import GameLayout from "@/widgets/Game/ui/GameLayout";
+import GameLeftPanel from "@/widgets/Game/ui/GameLeftPanel";
+import GameStatsPanel from "@/widgets/Game/ui/GameStatsPanel";
+import GameTopBar, { GameStatusBar } from "@/widgets/Game/ui/GameTopBar";
 
 /** Count total X marks across all boards */
 function countTotalMoves(boards: BoardState[]): number {

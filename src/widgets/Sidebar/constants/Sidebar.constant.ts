@@ -2,7 +2,7 @@ import type {
 	GameButton,
 	ModalAction,
 	NavItem,
-} from "@/widgets/Sidebar/Sidebar.types";
+} from "@/widgets/Sidebar/ui/Sidebar.types";
 
 export const NAV_ITEMS: NavItem[] = [
 	{ href: "/vsComputer", label: "VS CPU", icon: ">" },

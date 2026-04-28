@@ -1,15 +1,16 @@
-import type { Metadata } from "next";
+/** biome-ignore-all assist/source/organizeImports: <explanation> */
 import "@/app/globals.css";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Press_Start_2P } from "next/font/google";
 import ClientSideInit from "@/app/providers/ClientSideInit";
-import MusicProvider from "@/components/MusicProvider";
-import GlobalModals from "@/components/ui/GlobalModals";
-import Sidebar from "@/components/ui/Sidebar/Sidebar";
-import SidebarMargin from "@/components/ui/Sidebar/SidebarMargin";
-import SplashScreen from "@/components/ui/Splash/SplashScreen";
-import { CustomToastContainer } from "@/components/ui/Toasts/CustomToastContainer";
+import Sidebar from "@/widgets/Sidebar/ui/Sidebar";
+import GlobalModals from "@/app/providers/GlobalModals";
+import SidebarMargin from "@/widgets/Sidebar/ui/SidebarMargin";
+import SplashScreen from "@/app/providers/SplashScreen";
+import MusicProvider from "@/app/providers/MusicProvider";
+import type { Metadata } from "next";
+import { CustomToastContainer } from "@/shared/ui/toast/CustomToastContainer";
 
 export const metadata: Metadata = {
 	title: "Menu | Notakto",

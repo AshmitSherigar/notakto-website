@@ -1,7 +1,6 @@
 import Link from "next/link";
-
-import PixelButton from "@/components/ui/Pixel/PixelButton";
 import StaticPageLayout from "@/shared/ui/layout/StaticPageLayout";
+import PixelButton from "@/shared/ui/pixel/PixelButton";
 
 const NotFound = () => {
 	return (

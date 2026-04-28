@@ -1,0 +1,9 @@
+import type { WinnerContainerProps } from "@/features/winner/ui/components/WinnerContainer.types";
+
+export default function WinnerContainer({ children }: WinnerContainerProps) {
+	return (
+		<section className="bg-panel pixel-border text-center p-4 md:p-6 w-[95%] md:w-[80%] max-w-md">
+			{children}
+		</section>
+	);
+}

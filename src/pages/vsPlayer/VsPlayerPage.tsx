@@ -1,31 +1,37 @@
+/** biome-ignore-all assist/source/organizeImports: <explanation> */
 "use client";
 
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import { useShortcut } from "@/components/hooks/useShortcut";
-import Board from "@/components/ui/Board/Board";
-import BoardDisplay from "@/components/ui/Game/BoardDisplay";
-import BoardPreviewGrid from "@/components/ui/Game/BoardPreviewGrid";
-import BoardSelector from "@/components/ui/Game/BoardSelector";
-import GameActionBar from "@/components/ui/Game/GameActionBar";
-import GameCenterColumn from "@/components/ui/Game/GameCenterColumn";
-import GameContentArea from "@/components/ui/Game/GameContentArea";
-import GameLeftPanel from "@/components/ui/Game/GameLeftPanel";
-import GameStatsPanel from "@/components/ui/Game/GameStatsPanel";
-import type { MoveLogEntry } from "@/components/ui/Game/GameTopBar";
-import GameTopBar, { GameStatusBar } from "@/components/ui/Game/GameTopBar";
-import GameLayout from "@/components/ui/Layout/GameLayout";
-import BoardConfigModal from "@/modals/BoardConfigModal";
-import ConfirmationModal from "@/modals/ConfirmationModal";
-import PlayerNamesModal from "@/modals/PlayerNamesModal";
-import WinnerModal from "@/modals/WinnerModal";
-import { useGlobalModal } from "@/services/globalModal";
-import { isBoardDead } from "@/services/logic";
-import { playMoveSound, playWinSound } from "@/services/sounds";
-import { useSound } from "@/services/store";
-import type { BoardNumber, BoardSize, BoardState } from "@/services/types";
+import type MoveLogEntry from "@/shared/types/MoveLogEntry.types";
+import Board from "@/shared/ui/board/Board";
+import { useGlobalModal } from "@/shared/lib/globalModalStore/useGlobalModalStore";
+import { useSound } from "@/shared/lib/sounds/useSound";
+import { playMoveSound, playWinSound } from "@/shared/lib/sounds/sounds";
+import { isBoardDead } from "@/shared/lib/game/logic";
+import BoardPreviewGrid from "@/widgets/Game/ui/BoardPreviewGrid";
+import BoardSelector from "@/widgets/Game/ui/BoardSelector";
+import GameActionBar from "@/widgets/Game/ui/GameActionBar";
+import GameCenterColumn from "@/widgets/Game/ui/GameCenterColumn";
+import GameContentArea from "@/widgets/Game/ui/GameContentArea";
+import GameLeftPanel from "@/widgets/Game/ui/GameLeftPanel";
+import GameStatsPanel from "@/widgets/Game/ui/GameStatsPanel";
+import GameLayout from "@/widgets/Game/ui/GameLayout";
+import type {
+	BoardNumber,
+	BoardSize,
+	BoardState,
+} from "@/shared/types/game.types";
+import BoardDisplay from "@/widgets/Game/ui/BoardDisplay";
+import { useShortcut } from "@/shared/lib/shortcut/useShortcut";
+import GameTopBar, { GameStatusBar } from "@/widgets/Game/ui/GameTopBar";
+import WinnerModal from "@/features/winner/ui/WinnerModal";
+import PlayerNamesModal from "@/features/player-name/ui/PlayerNameModal";
+import ConfirmationModal from "@/shared/ui/modal/ConfirmationModal/ConfirmationModal";
+import BoardConfigModal from "@/shared/ui/modal/BoardConfigModal/BoardConfigModal";
 
 const VsPlayerPage = () => {
+	console.log("THIS IS VS PLAYER PAGE!");
 	const [boards, setBoards] = useState<BoardState[]>([]);
 	const [boardSize, setBoardSize] = useState<BoardSize>(3);
 	const [currentPlayer, setCurrentPlayer] = useState<1 | 2>(1);

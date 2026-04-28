@@ -1,7 +1,6 @@
 import type { ToastContainerProps } from "react-toastify";
 
-// Toast components
-export interface CustomToastContainerProps
+export default interface CustomToastContainerProps
 	extends Omit<ToastContainerProps, "toastClassName"> {
 	toastClassName?: ToastContainerProps["toastClassName"];
 }

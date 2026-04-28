@@ -1,0 +1,13 @@
+import type BoardDisplayProps from "@/widgets/Game/ui/BoardDisplay.types";
+
+export default function BoardDisplay({ children, visible }: BoardDisplayProps) {
+	if (!visible) return null;
+
+	return (
+		<div className="flex items-center justify-center w-full p-2 sm:p-3 md:flex-1 md:p-4">
+			<div className="max-w-[min(92vw,360px)] sm:max-w-100 md:max-w-130 w-full">
+				{children}
+			</div>
+		</div>
+	);
+}

@@ -4,10 +4,10 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import type { CSSProperties } from "react";
 import { useEffect, useState } from "react";
-import { signInWithGoogle, signOutUser } from "@/services/firebase";
-import { useGlobalModal } from "@/services/globalModal";
-import { useSidebar } from "@/services/sidebar";
-import { useUser } from "@/services/store";
+import { signInWithGoogle, signOutUser } from "@/shared/lib/firebase/auth";
+import { useGlobalModal } from "@/shared/lib/globalModalStore/useGlobalModalStore";
+import { useSidebar } from "@/shared/lib/sidebar/useSidebar";
+import { useUser } from "@/shared/lib/store/user/useUser";
 import {
 	GAME_BUTTONS,
 	GAME_PAGES,
@@ -18,7 +18,7 @@ import type {
 	GameModalAction,
 	ModalAction,
 	NavItem,
-} from "@/widgets/Sidebar/Sidebar.types";
+} from "@/widgets/Sidebar/ui/Sidebar.types";
 
 function SidebarTooltip({
 	label,

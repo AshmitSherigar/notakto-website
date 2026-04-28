@@ -1,5 +1,6 @@
-import { maxWidthStyles } from "@/shared/config/static.layout.config";
-import type { StaticPageLayoutProps } from "@/shared/types/static.layout.type";
+/** biome-ignore-all lint/style/noRestrictedImports: <explanation> */
+import { maxWidthStyles } from "./StaticPageLayout.config";
+import type { StaticPageLayoutProps } from "./StaticPageLayout.type";
 
 export default function StaticPageLayout({
 	children,

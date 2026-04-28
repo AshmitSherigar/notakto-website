@@ -5,10 +5,12 @@
 import type { User } from "firebase/auth";
 import { useEffect, useRef } from "react";
 import { toast } from "react-toastify";
-// Firebase module
-import { onAuthStateChangedListener } from "@/services/firebase";
-import { getWallet, signIn } from "@/services/game-apis";
-import { useCoins, useProfile, useUser, useXP } from "@/services/store";
+import { getWallet, signIn } from "@/shared/api/game.api";
+import { onAuthStateChangedListener } from "@/shared/lib/firebase/auth";
+import { useCoins } from "@/shared/lib/store/coins/useCoins";
+import { useProfile } from "@/shared/lib/store/profile/useProfile";
+import { useUser } from "@/shared/lib/store/user/useUser";
+import { useXP } from "@/shared/lib/store/xp/useXP";
 
 const ClientSideInit = (): null => {
 	const setUser = useUser(

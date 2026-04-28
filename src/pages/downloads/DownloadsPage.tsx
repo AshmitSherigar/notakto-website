@@ -1,7 +1,7 @@
 "use client";
 
-import PlatformCardList from "@/components/ui/Cards/PlatformCardList";
 import StaticPageLayout from "@/shared/ui/layout/StaticPageLayout";
+import PlatformCardList from "@/shared/ui/platform/PlatformList";
 
 const PLATFORMS = [
 	{ name: "WINDOWS", icon: "W", desc: "Windows 10+" },

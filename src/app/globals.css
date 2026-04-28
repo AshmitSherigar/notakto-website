@@ -1,9 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap");
 @import "tailwindcss";
 /* I have to update this file paths most prolly vscode wont give error later while finaly generating */
-@import "../components/ui/styles/animations.css";
-@import "../components/ui/styles/pixel-utilities.css";
-@import "../components/ui/styles/layout-utilities.css";
+@import "../shared/styles/animation.css";
+@import "../shared/styles/pixel-utilities.css";
+@import "../shared/styles/layout-utilities.css";
 
 @theme {
   /* Backgrounds */

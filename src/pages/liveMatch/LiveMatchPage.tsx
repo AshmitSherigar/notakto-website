@@ -3,19 +3,22 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { io } from "socket.io-client";
-import { useToastCooldown } from "@/components/hooks/useToastCooldown";
-import ExitBar from "@/components/ui/Buttons/ExitBar";
-import BoardCell from "@/components/ui/Containers/Games/Live/BoardCell";
-import BoardGridContainer from "@/components/ui/Containers/Games/Live/BoardGridContainer";
-import BoardLiveContainer from "@/components/ui/Containers/Games/Live/BoardLiveContainer";
-import LiveContainer from "@/components/ui/Containers/Games/Live/LiveContainer";
-import SearchContainer from "@/components/ui/Containers/Games/Live/SearchContainer";
-import Spinner from "@/components/ui/Feedback/Spinner";
-import GameTopBar, { GameStatusBar } from "@/components/ui/Game/GameTopBar";
-import GameLayout from "@/components/ui/Layout/GameLayout";
-import SearchLabel from "@/components/ui/Title/SearchLabel";
-import { TOAST_DURATION, TOAST_IDS } from "@/constants/toast";
-import { useUser } from "@/services/store";
+import SearchLabel from "@/features/search/ui/SearchLabel";
+import { useUser } from "@/shared/lib/store/user/useUser";
+import { useToastCooldown } from "@/shared/lib/useToastCooldown";
+import Spinner from "@/shared/ui/spinner/Spinner";
+import {
+	TOAST_DURATION,
+	TOAST_IDS,
+} from "@/shared/ui/toast/CustomToastContainer.config";
+import BoardCell from "@/widgets/Game/ui/BoardCell";
+import BoardGridContainer from "@/widgets/Game/ui/BoardGridContainer";
+import BoardLiveContainer from "@/widgets/Game/ui/BoardLiveContainer";
+import ExitBar from "@/widgets/Game/ui/ExitBar";
+import GameLayout from "@/widgets/Game/ui/GameLayout";
+import GameTopBar, { GameStatusBar } from "@/widgets/Game/ui/GameTopBar";
+import LiveContainer from "@/widgets/Game/ui/LiveContainer";
+import SearchContainer from "@/widgets/Game/ui/SearchContainer";
 
 const SERVER_URL = "https://notakto-websocket.onrender.com";
 const socket = io(SERVER_URL);

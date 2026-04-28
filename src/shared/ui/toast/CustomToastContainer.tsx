@@ -1,9 +1,9 @@
 "use client";
 
 import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import { TOAST_DURATION } from "@/shared/config/toast.config";
-import type { CustomToastContainerProps } from "@/shared/types/toast.type";
+// import "react-toastify/dist/ReactToastify.css";
+import { TOAST_DURATION } from "@/shared/ui/toast/CustomToastContainer.config";
+import type { CustomToastContainerProps } from "@/shared/ui/toast/CustomToastContainer.type";
 
 export function CustomToastContainer({
 	position = "top-center",
@@ -32,7 +32,7 @@ export function CustomToastContainer({
 				<button
 					type="button"
 					onClick={props.closeToast}
-					className="absolute top-1 flex items-center justify-center right-1 h-[25px] w-[25px] text-cream font-pixel text-[8px] border border-border-pixel hover:text-pixel-white"
+					className="absolute top-1 flex items-center justify-center right-1 h-6.25 w-6.25 text-cream font-pixel text-[8px] border border-border-pixel hover:text-pixel-white"
 					aria-label="close">
 					X
 				</button>
