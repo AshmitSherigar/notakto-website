@@ -1,11 +1,16 @@
-import type { Metadata } from "next";
-import "@/app/globals.css";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-import { VT323 } from "next/font/google";
-import ClientSideInit from "@/app/ClientSideInit";
-import MusicProvider from "@/components/MusicProvider";
-import { CustomToastContainer } from "@/components/ui/Toasts/CustomToastContainer";
+import type { Metadata } from "next";
+import { Press_Start_2P } from "next/font/google";
+import "@/app/globals.css";
+import type React from "react";
+import InitializeClientSession from "@/features/initialize-client-session/ui/InitializeClientSession";
+import MusicProvider from "@/features/play-game-audio/ui/MusicProvider";
+import GlobalModalLayer from "@/widgets/global-modal-layer/ui/GlobalModalLayer";
+import SidebarMargin from "@/widgets/sidebar-navigation/ui/SidebarMargin";
+import SidebarNavigation from "@/widgets/sidebar-navigation/ui/SidebarNavigation";
+import SplashScreen from "@/widgets/splash-screen/ui/SplashScreen";
+import { CustomToastContainer } from "@/widgets/toast-surface/ui/ToastSurface";
 
 export const metadata: Metadata = {
 	metadataBase: new URL("https://www.notakto.xyz"),
@@ -56,7 +61,7 @@ export const metadata: Metadata = {
 		],
 	},
 };
-const vt323 = VT323({
+const pressStart2P = Press_Start_2P({
 	weight: "400",
 	subsets: ["latin"],
 });
@@ -67,7 +72,7 @@ export default function RootLayout({
 	children: React.ReactNode;
 }>) {
 	return (
-		<html lang="en" className={vt323.className}>
+		<html lang="en" className={pressStart2P.className}>
 			<head>
 				<script
 					async
@@ -79,13 +84,16 @@ export default function RootLayout({
 				/>
 				<meta name="monetag" content="31cbc3974b21341db36f756db33d15d6"></meta>
 			</head>
-			<body>
+			<body className="bg-bg0 text-pixel-white">
 				<MusicProvider />
-				{children}
+				<SplashScreen />
+				<SidebarNavigation />
+				<SidebarMargin>{children}</SidebarMargin>
+				<GlobalModalLayer />
 				<CustomToastContainer />
 				<Analytics />
 				<SpeedInsights />
-				<ClientSideInit />
+				<InitializeClientSession />
 			</body>
 		</html>
 	);

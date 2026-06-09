@@ -1,13 +1,8 @@
 import { act, render, screen } from "@testing-library/react";
 import { toast } from "react-toastify";
-import { afterEach, describe, expect, it, vi } from "vitest";
+import { afterEach, describe, expect, it } from "vitest";
 
-// Mock font for next/font/google
-vi.mock("next/font/google", () => ({
-	VT323: (_opts: unknown) => ({ className: "vt323-class" }),
-}));
-
-import { CustomToastContainer } from "@/components/ui/Toasts/CustomToastContainer";
+import { CustomToastContainer } from "@/widgets/toast-surface/ui/ToastSurface";
 
 describe("Toast Tests", () => {
 	afterEach(() => {
@@ -30,13 +25,7 @@ describe("Toast Tests", () => {
 			toastText.closest(".Toastify__toast") ?? toastText.closest("div");
 		expect(toastWrapper).toBeTruthy();
 
-		const expected = [
-			"vt323-class",
-			"bg-black",
-			"text-white",
-			"relative",
-			"text-center",
-		];
+		const expected = ["bg-panel", "text-cream", "relative", "text-center"];
 		for (const cls of expected) expect(toastWrapper?.className).toContain(cls);
 
 		expect(screen.queryAllByText("Hello Toast Test")).toHaveLength(1);

@@ -1,0 +1,28 @@
+/* ─── PIXEL UTILITY CLASSES ─────────────────────────── */
+
+.pixel-border {
+	border: 3px solid var(--color-border-pixel);
+	box-shadow:
+		inset 0 0 0 1px var(--color-bg0),
+		3px 3px 0 var(--color-bg0);
+}
+
+.pixel-border-primary {
+	border: 3px solid var(--color-primary);
+	box-shadow:
+		inset 0 0 0 1px var(--color-bg0),
+		3px 3px 0 var(--color-bg0);
+}
+
+.pixel-border-accent {
+	border: 3px solid var(--color-accent);
+	box-shadow:
+		inset 0 0 0 1px var(--color-bg0),
+		3px 3px 0 var(--color-bg0);
+}
+
+.pixel-text-shadow {
+	text-shadow:
+		2px 2px 0 var(--color-bg0),
+		-1px -1px 0 var(--color-bg0);
+}

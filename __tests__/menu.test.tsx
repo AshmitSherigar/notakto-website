@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
-import type { UserStore } from "@/services/types";
+import type { UserStore } from "@/entities/game/model/types";
 
 // Required mocks
 vi.mock("next/navigation", () => ({
@@ -8,14 +8,19 @@ vi.mock("next/navigation", () => ({
 	usePathname: () => "/",
 }));
 
-vi.mock("@/services/firebase", () => ({
+vi.mock("@/features/authenticate-user/api/firebase", () => ({
 	signInWithGoogle: vi.fn(),
 	signOutUser: vi.fn(),
 }));
 
-vi.mock("@/services/store", () => ({
+vi.mock("@/features/app-state/model/stores", () => ({
 	useUser: <T,>(selector: (state: UserStore) => T) =>
-		selector({ user: null, setUser: vi.fn() }),
+		selector({
+			user: null,
+			setUser: vi.fn(),
+			authReady: true,
+			setAuthReady: vi.fn(),
+		}),
 	useSound: () => ({
 		bgMute: false,
 		bgVolume: 0.5,
@@ -45,7 +50,7 @@ vi.mock("@/services/store", () => ({
 	}),
 }));
 
-vi.mock("@/components/hooks/useToastCooldown", () => ({
+vi.mock("@/features/show-toast-with-cooldown/model/useToastCooldown", () => ({
 	useToastCooldown: () => ({
 		canShowToast: () => true,
 		triggerToastCooldown: vi.fn(),
@@ -53,32 +58,20 @@ vi.mock("@/components/hooks/useToastCooldown", () => ({
 	}),
 }));
 
-import Menu from "@/app/Menu";
+import Menu from "@/widgets/home-menu/ui/HomeMenu";
 
-describe("Menu buttons", () => {
-	it("renders all expected menu buttons", () => {
+describe("Menu game modes", () => {
+	it("renders all expected game mode cards", () => {
 		render(<Menu />);
 
-		expect(
-			screen.getByRole("button", { name: /play vs player/i }),
-		).toBeInTheDocument();
-		expect(
-			screen.getByRole("button", { name: /play vs computer/i }),
-		).toBeInTheDocument();
-		expect(
-			screen.getByRole("button", { name: /live match/i }),
-		).toBeInTheDocument();
-		expect(
-			screen.getByRole("button", { name: /tutorial/i }),
-		).toBeInTheDocument();
-		expect(
-			screen.getByRole("button", { name: /sign in|sign out/i }),
-		).toBeInTheDocument();
-		expect(
-			screen.getByRole("button", { name: /adjust sound/i }),
-		).toBeInTheDocument();
-		expect(
-			screen.getByRole("button", { name: /keyboard shortcuts/i }),
-		).toBeInTheDocument();
+		expect(screen.getByText("VS PLAYER")).toBeInTheDocument();
+		expect(screen.getByText("VS CPU")).toBeInTheDocument();
+		expect(screen.getByText("LIVE MATCH")).toBeInTheDocument();
+	});
+
+	it("renders the title", () => {
+		render(<Menu />);
+
+		expect(screen.getByText("NOTAKTO")).toBeInTheDocument();
 	});
 });
