@@ -21,6 +21,7 @@ export default function LeaderboardModal({
 	onClose,
 }: LeaderboardModalProps) {
 	const [leaderboard, setLeaderboard] = useState<LeaderboardEntry[]>([]);
+	const [currentUser, setCurrentUser] = useState<LeaderboardEntry | null>(null);
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState<string | null>(null);
 
@@ -46,6 +47,7 @@ export default function LeaderboardModal({
 
 				if (!ignore) {
 					setLeaderboard(response.leaderboard);
+					setCurrentUser(response.current_user);
 				}
 			} catch (error) {
 				if (ignore) return;
@@ -87,7 +89,12 @@ export default function LeaderboardModal({
 					</p>
 				)}
 
-				{!loading && !error && <LeaderboardList leaderboard={leaderboard} />}
+				{!loading && !error && currentUser && (
+					<LeaderboardList
+						leaderboard={leaderboard}
+						currentUser={currentUser}
+					/>
+				)}
 
 				<LeaderboardControls onClose={onClose} />
 			</LeaderboardContainer>
